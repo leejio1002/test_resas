@@ -15,11 +15,11 @@ const resasSlice = createSlice({
   name: 'resas',
   initialState,
   reducers: {
-    loadPrefectures: (state, action) => {
+    loadPrefSuccess: (state, action) => {
       state.prefectures = action.payload;
     },
   },
 });
 
-export const { loadPrefectures } = resasSlice.actions;
+export const { loadPrefSuccess } = resasSlice.actions;
 export default resasSlice.reducer;
