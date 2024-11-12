@@ -10,13 +10,13 @@ import { PopulationData } from '../../lib/types';
 interface Props {
   populationData: PopulationData[];
   curAge: number;
-  className: string;
+  className?: string;
 }
 
 const PopulationChart: React.FC<Props> = ({ populationData, curAge, className = '' }) => {
   // Extract data for chart options
   const years =
-    populationData.length !== 0
+    populationData.length > 0 && populationData[0].data.length > 0
       ? populationData[0].data[0].data.map((item) => item.year.toString())
       : [];
 
@@ -24,7 +24,7 @@ const PopulationChart: React.FC<Props> = ({ populationData, curAge, className = 
     const temp: SeriesLineOptions = {
       type: 'line',
       name: item.prefName,
-      data: item.data[curAge].data.map((value) => value.value),
+      data: item.data[curAge].data.map((item) => item.value),
     };
     return temp;
   });
@@ -43,27 +43,8 @@ const PopulationChart: React.FC<Props> = ({ populationData, curAge, className = 
       title: {
         text: '人口数', // "Population" in Japanese
       },
-      // labels: {
-      //   formatter: function () {
-      //     return `${this.value}k`; // Format as thousands
-      //   },
-      // },
     },
     series: data,
-    // series:[
-    //   {
-    //     name: '香川県', // Kagawa
-    //     type: 'line',
-    //     data: kagawaData,
-    //     color: '#00bfff', // Light blue color
-    //   },
-    //   {
-    //     name: '愛媛県', // Ehime
-    //     type: 'line',
-    //     data: ehimeData,
-    //     color: '#6a5acd', // Purple color
-    //   },
-    // ],
     accessibility: {
       enabled: false,
     },
@@ -83,4 +64,4 @@ const PopulationChart: React.FC<Props> = ({ populationData, curAge, className = 
   );
 };
 
-export default PopulationChart;
+export default React.memo(PopulationChart);

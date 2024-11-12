@@ -6,11 +6,11 @@ import { store } from './redux/store';
 import { Suspense } from 'react';
 import Analysis from './components/organism/Analysis';
 import Header from './components/molecules/header/header.component';
-
+import Spinner from './components/atoms/loadingSpinner/spinner.component';
 function App() {
   return (
     <Provider store={store}>
-      <Suspense>
+      <Suspense fallback={<Spinner />}>
         <Header text="人口統計資料" />
         <Prefectures />
         <Analysis />

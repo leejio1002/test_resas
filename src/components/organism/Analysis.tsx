@@ -1,20 +1,15 @@
 import React, { useMemo } from 'react';
 import PopulationChart from './PopulationChart';
 import AgeSelector from '../atoms/select/select.component';
-import { RootState } from '../../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurAge } from '../../redux/slices/resasSlice';
+import useResas from '../../hook/useResas';
 
 const Analysis: React.FC = () => {
-  const dispatch = useDispatch();
+  const { curAge, populationData, setCurrentAge } = useResas();
 
   // Handle Age Change
   const handleChange = (curAge: number) => {
-    dispatch(setCurAge(curAge));
+    setCurrentAge(curAge);
   };
-
-  const curAge = useSelector((state: RootState) => state.resas.curAge);
-  const populationData = useSelector((state: RootState) => state.resas.populationData);
 
   // Memoize the options array to prevent unnecessary re-computations
   const options = useMemo(() => {
@@ -36,11 +31,11 @@ const Analysis: React.FC = () => {
           options={options}
           curValue={curAge}
           handleChange={handleChange}
-          className="bg-gray-900 flex justify-center items-center pb-12"
+          className="bg-gray-900 flex justify-center items-center pb-4"
         />
       )}
 
-      <PopulationChart curAge={curAge} populationData={populationData} className="mx-12" />
+      <PopulationChart curAge={curAge} populationData={populationData} className="mx-16" />
     </div>
   );
 };

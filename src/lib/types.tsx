@@ -14,5 +14,5 @@ export interface PopulationDataByAge {
 
 export interface PopulationDataByYear {
   value: number;
-  year: number;
+  year: Number;
 }

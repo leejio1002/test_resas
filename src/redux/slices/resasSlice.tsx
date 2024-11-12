@@ -7,6 +7,7 @@ interface CounterState {
   populationData: Array<PopulationData>;
   curPrefName: string;
   curAge: number;
+  selectedPrefs: number[];
 }
 
 const initialState: CounterState = {
@@ -14,6 +15,7 @@ const initialState: CounterState = {
   populationData: [],
   curPrefName: '',
   curAge: 0,
+  selectedPrefs: [],
 };
 
 const resasSlice = createSlice({
@@ -40,6 +42,13 @@ const resasSlice = createSlice({
       const newData = state.populationData.filter((item) => item.prefName !== prefName);
       state.populationData = [...newData];
     },
+    addPref: (state, action) => {
+      state.selectedPrefs.push(action.payload);
+    },
+    rmvPref: (state, action) => {
+      const newPref = state.selectedPrefs.filter((pref) => pref !== action.payload);
+      state.selectedPrefs = newPref;
+    },
   },
 });
 
@@ -49,5 +58,7 @@ export const {
   setCurAge,
   setCurPrefName,
   removePopulationData,
+  addPref,
+  rmvPref,
 } = resasSlice.actions;
 export default resasSlice.reducer;
