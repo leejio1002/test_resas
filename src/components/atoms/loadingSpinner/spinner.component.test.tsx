@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react'
-import Spinner from './spinner.component'
+import { render } from '@testing-library/react';
+import Spinner from './spinner.component';
 
 test('renders the Spinner Component', () => {
-    render(<Spinner />)
-})
+  // eslint-disable-next-line react/react-in-jsx-scope
+  render(<Spinner />);
+});
