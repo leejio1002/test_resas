@@ -1,14 +1,26 @@
-import { useDispatch } from "react-redux";
-import { fetchPrefectures } from "../api/resas";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopulationData, fetchPrefectures } from '../api/resas';
+import { RootState } from '../redux/store';
+import { useCallback } from 'react';
 
-export default function useResas(){
-    const dispatch=useDispatch();
+export default function useResas() {
+  const dispatch = useDispatch();
+  const { prefectures } = useSelector((state: RootState) => state.resas);
 
-    const loadPrefectures=async()=>{
-        await fetchPrefectures(dispatch);
-    }
+  const loadPrefectures = useCallback(async () => {
+    await fetchPrefectures(dispatch);
+  }, []);
 
-    return{
-        loadPrefectures
-    }
+  const loadPopulationData = useCallback(
+    async (prefCode: number) => {
+      await fetchPopulationData(prefCode, dispatch);
+    },
+    [dispatch],
+  );
+
+  return {
+    prefectures,
+    loadPrefectures,
+    loadPopulationData,
+  };
 }

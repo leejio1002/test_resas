@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './tailwind.css'; // Adjust the path to where your tailwind.css is located
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
